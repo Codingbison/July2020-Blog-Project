@@ -4,11 +4,23 @@
 <header class="banner">
     <h1 class="header_text">This is a blog during a pandemic situation</h1>
 </header>
-<h1>Hello {{ customer_name }}</h1>
-<p>{{ order_number }}</p>
-<u>
-{% for key,item in item_dict.items() %}
-    <li>{{ key }} - {{ item }}</li>
+
+<h2>Hello there! {{ current_user.username }}</h2>
+
+{% if current_user.is_authenticated %}
+
+{% for post in posts %}
+<div class="container">
+    <h3>
+        <a href="{{ url_for('post_detail', post_id = post.id) }}">{{ post.title }}</a>
+    </h3>
+    <p>{{ post.content}}</p>
+</div>
 {% endfor %}
-</u>
+
+{% else %}
+<h2>Nothing to show here...</h2>
+
+{% endif %}
+
 {% endblock content %}
